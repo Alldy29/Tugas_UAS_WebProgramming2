@@ -67,7 +67,7 @@
                 </select>
 
                     <!-- Kategori -->
-                    <select class="form-control mb-2" name="kategori_id" required>
+                    <select class="form-control mb-2" name="id_kategori" required>
                         <option value="">Pilih Kategori</option>
                         <?php
                         $sql = "SELECT * FROM kategori ORDER BY nama_kategori ASC";

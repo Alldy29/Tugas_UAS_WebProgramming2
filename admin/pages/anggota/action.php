@@ -41,7 +41,7 @@ if (isset($_GET['act'])) {
         $kode_anggota = generate_anggota_code($koneksi);
 
         // Query Insert
-        $query = "INSERT INTO anggota (kode_anggota, nama, jenis_kelamin, alamat, no_hp) 
+        $query = "INSERT INTO anggota (kode_anggota, nama_anggota, jenis_kelamin, alamat, no_hp) 
                   VALUES ('$kode_anggota', '$nama', '$jenis_kelamin', '$alamat', '$no_hp')";
         $execute = mysqli_query($koneksi, $query);
 
@@ -65,14 +65,14 @@ if (isset($_GET['act'])) {
     // === UPDATE DATA ANGGOTA ===
     } elseif ($act == "update") {
         $id_anggota = $_GET['id_anggota']; // ID yang diedit ambil dari URL
-        $nama = $_POST['nama'];
+        $nama_anggota = $_POST['nama_anggota'];
         $jenis_kelamin = $_POST['jenis_kelamin'];
         $alamat = $_POST['alamat'];
         $no_hp = $_POST['no_hp'];
 
         // Query Update
         $sql = "UPDATE anggota SET 
-                    nama='$nama', 
+                    nama_anggota='$nama_anggota', 
                     jenis_kelamin='$jenis_kelamin', 
                     alamat='$alamat', 
                     no_hp='$no_hp' 

@@ -46,7 +46,7 @@ $data = mysqli_fetch_array($query);
                     <!-- Input Nama -->
                     <div class="form-group">
                         <label>Nama Anggota</label>
-                        <input type="text" class="form-control" name="nama" value="<?php echo $data['nama']; ?>" required>
+                        <input type="text" class="form-control" name="nama_anggota" value="<?php echo $data['nama_anggota']; ?>" required>
                     </div>
 
                     <!-- Input Jenis Kelamin (Dropdown L / P) -->

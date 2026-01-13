@@ -26,7 +26,7 @@ if($act == 'insert'){
     header("location:../../dashboard.php?page=buku");
 
 } elseif($act == 'update'){
-    $id = $_GET['id_buku'];
+    $id_buku = $_GET['id_buku'];
 
     // Ambil data dari form
     $kode_buku = $_POST['kode_buku'];
@@ -54,7 +54,7 @@ if($act == 'insert'){
 
 } elseif($act == 'delete'){
     // Ambil id buku dari URL
-    $id_buku = $_GET['id'];
+    $id_buku = $_GET['id_buku'];
 
     // Query Delete
     mysqli_query($koneksi, "DELETE FROM buku WHERE id_buku='$id_buku'");
