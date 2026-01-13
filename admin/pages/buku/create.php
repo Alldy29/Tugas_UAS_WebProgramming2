@@ -32,20 +32,45 @@
 
             <div class="card-body">
                 <form method="POST" action="pages/buku/action.php?act=insert">
+                    <!-- Kode Buku -->
                     <input class="form-control mb-2" type="text" name="kode_buku"
                            placeholder="Kode Buku" required>
+
+                    <!-- Judul Buku -->
                     <input class="form-control mb-2" type="text" name="judul"
                            placeholder="Judul Buku" required>
+
+                    <!-- Pengarang -->
                     <input class="form-control mb-2" type="text" name="pengarang"
                            placeholder="Pengarang" required>
+
+                    <!-- Penerbit -->
                     <input class="form-control mb-2" type="text" name="penerbit"
                            placeholder="Penerbit" required>
-                    <input class="form-control mb-2" type="number" name="tahun_terbit"
-                           placeholder="Tahun Terbit" required>
+
+                    <!-- Tahun Terbit (YEAR) -->
+                    <select
+                    name="tahun_terbit"
+                    class="form-control mb-2"
+                    required>
+
+                    <option value="">-- Pilih Tahun --</option>
+
+                    <?php
+                    $tahun_mulai = 2000;
+                    $tahun_sekarang = date('Y');
+
+                    for ($tahun = $tahun_mulai; $tahun <= $tahun_sekarang; $tahun++) {
+                        echo "<option value='$tahun'>$tahun</option>";
+                    }
+                    ?>
+                </select>
+
+                    <!-- Kategori -->
                     <select class="form-control mb-2" name="kategori_id" required>
                         <option value="">Pilih Kategori</option>
                         <?php
-                        $sql = "SELECT * FROM kategori";
+                        $sql = "SELECT * FROM kategori ORDER BY nama_kategori ASC";
                         $query = mysqli_query($koneksi, $sql);
                         while ($kategori = mysqli_fetch_assoc($query)) {
                         ?>
@@ -56,8 +81,12 @@
                         }
                         ?>
                     </select>
+
+                    <!-- Stok -->
                     <input class="form-control mb-2" type="number" name="stok"
-                           placeholder="Stok" required>
+                           placeholder="Stok" min="0" required>
+
+                    <!-- Tombol Simpan & Reset -->
                     <button type="submit" class="btn btn-primary">Simpan</button>
                     <button type="reset" class="btn btn-danger">Reset</button>
                 </form>

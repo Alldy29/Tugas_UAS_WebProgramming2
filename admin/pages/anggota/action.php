@@ -3,50 +3,46 @@
 include "../../../config/koneksi.php";
 session_start();
 
-// Fungsi kustom untuk membuat Kode Customer Otomatis
-// Logic: Mengambil kode terakhir (misal CS005), mengambil angkanya (5), ditambah 1 (6), format ulang (CS006)
-function generate_customer_code($koneksi) {
-    // Query mengambil 1 data terakhir berdasarkan customer_id terbesar
-    $query = "SELECT customer_code FROM customers ORDER BY customer_id DESC LIMIT 1";
+// Fungsi kustom untuk membuat Kode Anggota Otomatis
+// Logic: Mengambil kode terakhir (misal CS005), mengambil angkanya (5), tambah 1 (6), format ulang (CS006)
+function generate_anggota_code($koneksi) {
+    // Query mengambil 1 data terakhir berdasarkan id_anggota terbesar
+    $query = "SELECT kode_anggota FROM anggota ORDER BY id_anggota DESC LIMIT 1";
     $result = mysqli_query($koneksi, $query);
     $data = mysqli_fetch_array($result);
 
     if ($data) {
-        $last_code = $data['customer_code']; // Misal: CS001
+        $last_code = $data['kode_anggota']; // Misal: CS001
         // Ambil angka dari string 'CS001' mulai index ke-2
-        // substr("CS001", 2) menghasilkan "001"
-        // (int) mengubah string "001" menjadi angka 1
         $number = (int) substr($last_code, 2);
         $number++; // Tambah 1
     } else {
-        // Jika belum ada data sama sekali, mulai dari 1
-        $number = 1;
+        $number = 1; // Jika belum ada data sama sekali
     }
 
-    // Format kode baru: "CS" + angka yang dipadding dengan 0 (3 digit)
-    // sprintf("%03s", 1) menjadi "001"
-    $new_code = "CS" . sprintf("%03s", $number);
-    return $new_code; // Mengembalikan kode baru
+    // Format kode baru: "CS" + angka 3 digit
+    $new_code = "AP" . sprintf("%03d", $number);
+    return $new_code;
 }
 
 // Cek parameter act di URL
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
     
-    // === INSERT DATA CUSTOMER ===
+    // === INSERT DATA ANGGOTA ===
     if ($act == "insert") {
         // Ambil data dari input form
-        $name = $_POST['name'];
-        $address = $_POST['address'];
-        $phone = $_POST['phone'];
+        $nama = $_POST['nama'];                       // name="nama" di form
+        $jenis_kelamin = $_POST['jenis_kelamin'];     // name="jenis_kelamin" di form
+        $alamat = $_POST['alamat'];                   // name="alamat"
+        $no_hp = $_POST['no_hp'];                     // name="no_hp"
         
-        // Panggil fungsi generate code otomatis
-        $customer_code = generate_customer_code($koneksi);
+        // Panggil fungsi generate kode otomatis
+        $kode_anggota = generate_anggota_code($koneksi);
 
         // Query Insert
-        // Menyimpan: customer_code (otomatis), name, address, phone, created_at (waktu sekarang/NOW())
-        $query = "INSERT INTO customers (customer_code, name, address, phone, created_at) 
-                  VALUES ('$customer_code', '$name', '$address', '$phone', NOW())";
+        $query = "INSERT INTO anggota (kode_anggota, nama, jenis_kelamin, alamat, no_hp) 
+                  VALUES ('$kode_anggota', '$nama', '$jenis_kelamin', '$alamat', '$no_hp')";
         $execute = mysqli_query($koneksi, $query);
 
         // Cek keberhasilan insert
@@ -55,27 +51,32 @@ if (isset($_GET['act'])) {
             $_SESSION['alert_type'] = 'alert-success';
             $_SESSION['type'] = 'Success';
             mysqli_close($koneksi);
-            header('location:../../dashboard.php?page=customers');
+            header('location:../../dashboard.php?page=anggota');
             exit;
         } else {
-            // Tampilkan error database jika gagal
             $_SESSION['message'] = 'Data Gagal Disimpan: ' . mysqli_error($koneksi);
             $_SESSION['alert_type'] = 'alert-danger';
             $_SESSION['type'] = 'Failed';
             mysqli_close($koneksi);
-            header('location:../../dashboard.php?page=customers');
+            header('location:../../dashboard.php?page=anggota');
             exit;
         }
 
-    // === UPDATE DATA CUSTOMER ===
+    // === UPDATE DATA ANGGOTA ===
     } elseif ($act == "update") {
-        $customer_id = $_GET['customer_id']; // ID yang diedit ambil dari URL
-        $name = $_POST['name'];
-        $address = $_POST['address'];
-        $phone = $_POST['phone'];
+        $id_anggota = $_GET['id_anggota']; // ID yang diedit ambil dari URL
+        $nama = $_POST['nama'];
+        $jenis_kelamin = $_POST['jenis_kelamin'];
+        $alamat = $_POST['alamat'];
+        $no_hp = $_POST['no_hp'];
 
         // Query Update
-        $sql = "UPDATE customers SET name='$name', address='$address', phone='$phone' WHERE customer_id='$customer_id'";
+        $sql = "UPDATE anggota SET 
+                    nama='$nama', 
+                    jenis_kelamin='$jenis_kelamin', 
+                    alamat='$alamat', 
+                    no_hp='$no_hp' 
+                WHERE id_anggota='$id_anggota'";
         $execute = mysqli_query($koneksi, $sql);
 
         if ($execute) {
@@ -83,23 +84,23 @@ if (isset($_GET['act'])) {
             $_SESSION['alert_type'] = 'alert-success';
             $_SESSION['type'] = 'Success';
             mysqli_close($koneksi);
-            header('location:../../dashboard.php?page=customers');
+            header('location:../../dashboard.php?page=anggota');
             exit;
         } else {
             $_SESSION['message'] = 'Data Gagal Di Update: ' . mysqli_error($koneksi);
             $_SESSION['alert_type'] = 'alert-danger';
             $_SESSION['type'] = 'Failed';
             mysqli_close($koneksi);
-            header('location:../../dashboard.php?page=customers');
+            header('location:../../dashboard.php?page=anggota');
             exit;
         }
 
-    // === DELETE DATA CUSTOMER ===
+    // === DELETE DATA ANGGOTA ===
     } elseif ($act == "delete") {
-        $customer_id = $_GET['customer_id'];
+        $id_anggota = $_GET['id_anggota'];
         
         // Query Delete
-        $sql = "DELETE FROM customers WHERE customer_id='$customer_id'";
+        $sql = "DELETE FROM anggota WHERE id_anggota='$id_anggota'";
         $execute = mysqli_query($koneksi, $sql);
 
         if ($execute) {
@@ -107,15 +108,16 @@ if (isset($_GET['act'])) {
             $_SESSION['alert_type'] = 'alert-success';
             $_SESSION['type'] = 'Success';
             mysqli_close($koneksi);
-            header('location:../../dashboard.php?page=customers');
+            header('location:../../dashboard.php?page=anggota');
             exit;
         } else {
             $_SESSION['message'] = 'Data Gagal Di Hapus: ' . mysqli_error($koneksi);
             $_SESSION['alert_type'] = 'alert-danger';
             $_SESSION['type'] = 'Failed';
             mysqli_close($koneksi);
-            header('location:../../dashboard.php?page=customers');
+            header('location:../../dashboard.php?page=anggota');
             exit;
         }
     }
 }
+?>

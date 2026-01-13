@@ -26,15 +26,15 @@
             <div class="card-body">
                 <!-- Form untuk mengirim data ke action.php dengan method POST -->
                 <!-- action: tujuan pengiriman data, page/categories/action.php dengan parameter act=insert -->
-                <form action="pages/categories/action.php?act=insert" method="POST">
+                <form action="pages/kategori/action.php?act=insert" method="POST">
                     
                     <!-- Input untuk Nama Kategori -->
                     <!-- class form-group untuk grouping elemen input -->
                     <div class="form-group">
-                        <label>Category Name</label>
+                        <label>Nama Kategori</label>
                         <!-- name="category_name" adalah kunci yang akan diterima di $_POST['category_name'] -->
                         <!-- required artinya input ini tidak boleh kosong -->
-                        <input type="text" class="form-control" name="category_name" required>
+                        <input type="text" class="form-control" name="nama_kategori" required>
                     </div>
 
                     <!-- Tombol Simpan -->

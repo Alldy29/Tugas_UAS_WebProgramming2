@@ -2,13 +2,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Customers</h1>
+                <h1 class="m-0">Anggota</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <!-- Breadcrumb Navigasi -->
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Customers</li>
+                    <li class="breadcrumb-item active">Anggota</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -21,7 +21,7 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Data Customer</h3>
+                <h3 class="card-title">Data Anggota</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                         <i class="fas fa-minus"></i>
@@ -34,7 +34,7 @@
             <div class="card-body">
                 <div class="d-flex mb-3 justify-content-between" >
                     <!-- Tombol Tambah Data -->
-                    <a href="dashboard.php?page=addcustomer" class="btn btn-primary ">Tambah Data</a>
+                    <a href="dashboard.php?page=addanggota" class="btn btn-primary ">Tambah Data</a>
                 </div>
                 
                 <?php
@@ -70,18 +70,19 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th style="width: 10px">#</th>
-                            <th>Code</th> <!-- Kolom Kode Customer -->
-                            <th>Customer Name</th>
-                            <th>Address</th>
-                            <th>Phone</th>
+                            <th style="width: 10px">No</th>
+                            <th>Kode_anggota</th> <!-- Kolom Kode Customer -->
+                            <th>Nama Anggota</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Alamat</th>
+                            <th>No HP</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         $no = 1;
-                        $sql = "SELECT * FROM customers"; // Query ambil semua data
+                        $sql = "SELECT * FROM anggota"; // Query ambil semua data
                         $query = mysqli_query($koneksi, $sql);
                         
                         // Loop data dari database
@@ -89,18 +90,19 @@
                         ?>
                             <tr>
                                 <td><?php echo $no; ?></td>
-                                <td><?php echo $data['customer_code']; ?></td> <!-- Tampilkan Kode -->
-                                <td><?php echo $data['name']; ?></td>
-                                <td><?php echo $data['address']; ?></td>
-                                <td><?php echo $data['phone']; ?></td>
+                                <td><?php echo $data['kode_anggota']; ?></td> <!-- Tampilkan Kode -->
+                                <td><?php echo $data['nama']; ?></td>
+                                <td><?php echo $data['jenis_kelamin']; ?></td>
+                                <td><?php echo $data['alamat']; ?></td>
+                                <td><?php echo $data['no_hp']; ?></td>
                                 <td>
                                     <div class="d-flex">
                                         <!-- Tombol Edit -->
-                                        <a href="dashboard.php?page=editcustomer&customer_id=<?php echo $data['customer_id'] ?>"
+                                        <a href="dashboard.php?page=editanggota&id_anggota=<?php echo $data['id_anggota'] ?>"
                                             class="btn btn-sm btn-success mr-2">Edit</a>
                                         
                                         <!-- Tombol Hapus -->
-                                        <a href="pages/customers/action.php?act=delete&customer_id=<?php echo $data['customer_id']; ?>"
+                                        <a href="pages/anggota/action.php?act=delete&id_anggota=<?php echo $data['id_anggota']; ?>"
                                             class="btn btn-sm btn-danger"
                                             onclick="return confirm('Are You Sure, Delete this Data')">Hapus</a>
                                     </div>

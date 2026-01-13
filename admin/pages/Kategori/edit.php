@@ -1,10 +1,10 @@
 <?php
 // Mengambil category_id dari parameter URL
 // Contoh: dashboard.php?page=editcategory&category_id=1
-$category_id = $_GET['category_id'];
+$id_kategori = $_GET['id_kategori'];
 
 // Query untuk mengambil data category berdasarkan ID untuk ditampilkan di form
-$sql = "SELECT * FROM categories WHERE category_id = '$category_id'";
+$sql = "SELECT * FROM kategori WHERE id_kategori = '$id_kategori'";
 $query = mysqli_query($koneksi, $sql);
 $data = mysqli_fetch_array($query); // Mengambil data sebagai array
 ?>
@@ -36,12 +36,12 @@ $data = mysqli_fetch_array($query); // Mengambil data sebagai array
             <div class="card-body">
                 <!-- Form untuk update data -->
                 <!-- action mengirim ke action.php dengan act=update dan membawa category_id yang sedang diedit -->
-                <form action="pages/categories/action.php?act=update&category_id=<?php echo $category_id; ?>" method="POST">
+                <form action="pages/kategori/action.php?act=update&id_kategori=<?php echo $id_kategori; ?>" method="POST">
                     
                     <div class="form-group">
-                        <label>Category Name</label>
+                        <label>Nama Kategori</label>
                         <!-- Menampilkan value lama dari database ke dalam input -->
-                        <input type="text" class="form-control" name="category_name" value="<?php echo $data['category_name']; ?>" required>
+                        <input type="text" class="form-control" name="nama_kategori" value="<?php echo $data['nama_kategori']; ?>" required>
                     </div>
                     
                     <!-- Tombol Simpan Perubahan -->

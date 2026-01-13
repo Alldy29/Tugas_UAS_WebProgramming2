@@ -11,11 +11,11 @@ if (isset($_GET['act'])) {
     // === LOGIKA INSERT (TAMBAH DATA) ===
     if ($act == "insert") {
         // Mengambil data dari form (POST)
-        $category_name = $_POST['category_name'];
+        $nama_kategori = $_POST['nama_kategori'];
 
         // Query SQL untuk menyimpan data baru ke tabel categories
         // ID tidak perlu dimasukkan karena AUTO_INCREMENT
-        $query = "INSERT INTO categories (category_name) VALUES ('$category_name')";
+        $query = "INSERT INTO kategori (nama_kategori) VALUES ('$nama_kategori')";
         $execute = mysqli_query($koneksi, $query); // Eksekusi query
 
         // Pengecekan apakah query berhasil
@@ -26,7 +26,7 @@ if (isset($_GET['act'])) {
             $_SESSION['type'] = 'Success';
             mysqli_close($koneksi); // Menutup koneksi database
             // Redirect kembali ke halaman list kategori
-            header('location:../../dashboard.php?page=categories');
+            header('location:../../dashboard.php?page=kategori');
             exit;
         } else {
             // Jika gagal, set pesan notifikasi Gagal
@@ -34,19 +34,19 @@ if (isset($_GET['act'])) {
             $_SESSION['alert_type'] = 'alert-danger';
             $_SESSION['type'] = 'Failed';
             mysqli_close($koneksi);
-            header('location:../../dashboard.php?page=categories');
+            header('location:../../dashboard.php?page=kategori');
             exit;
         }
 
     // === LOGIKA UPDATE (EDIT DATA) ===
     } elseif ($act == "update") {
         // Mengambil category_id dari URL (GET) karena dikirim lewat action form URL
-        $category_id = $_GET['category_id'];
+        $id_kategori = $_GET['id_kategori'];
         // Mengambil data nama kategori yang baru dari form (POST)
-        $category_name = $_POST['category_name'];
+        $nama_kategori = $_POST['nama_kategori'];
 
         // Query SQL untuk mengupdate data berdasarkan category_id
-        $sql = "UPDATE categories SET category_name='$category_name' WHERE category_id='$category_id'";
+        $sql = "UPDATE kategori SET nama_kategori='$nama_kategori' WHERE id_kategori='$id_kategori'";
         $execute = mysqli_query($koneksi, $sql);
 
         if ($execute) {
@@ -54,24 +54,24 @@ if (isset($_GET['act'])) {
             $_SESSION['alert_type'] = 'alert-success';
             $_SESSION['type'] = 'Success';
             mysqli_close($koneksi);
-            header('location:../../dashboard.php?page=categories');
+            header('location:../../dashboard.php?page=kategori');
             exit;
         } else {
             $_SESSION['message'] = 'Data Gagal Di Update';
             $_SESSION['alert_type'] = 'alert-danger';
             $_SESSION['type'] = 'Failed';
             mysqli_close($koneksi);
-            header('location:../../dashboard.php?page=categories');
+            header('location:../../dashboard.php?page=kategori');
             exit;
         }
 
     // === LOGIKA DELETE (HAPUS DATA) ===
     } elseif ($act == "delete") {
         // Mengambil category_id yang akan dihapus dari parameter URL
-        $category_id = $_GET['category_id'];
+        $id_kategori = $_GET['id_kategori'];
         
         // Query SQL untuk menghapus data
-        $sql = "DELETE FROM categories WHERE category_id='$category_id'";
+        $sql = "DELETE FROM kategori WHERE id_kategori='$id_kategori'";
         $execute = mysqli_query($koneksi, $sql);
 
         if ($execute) {
@@ -79,14 +79,14 @@ if (isset($_GET['act'])) {
             $_SESSION['alert_type'] = 'alert-success';
             $_SESSION['type'] = 'Success';
             mysqli_close($koneksi);
-            header('location:../../dashboard.php?page=categories');
+            header('location:../../dashboard.php?page=kategori');
             exit;
         } else {
             $_SESSION['message'] = 'Data Gagal Di Hapus';
             $_SESSION['alert_type'] = 'alert-danger';
             $_SESSION['type'] = 'Failed';
             mysqli_close($koneksi);
-            header('location:../../dashboard.php?page=categories');
+            header('location:../../dashboard.php?page=kategori');
             exit;
         }
     }

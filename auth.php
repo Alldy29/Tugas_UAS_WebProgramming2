@@ -19,8 +19,8 @@ if($cekuser==0){
     header('location:index.php');
 }else{
     $datauser = mysqli_fetch_array($query);
-    $_SESSION['status_login'] = true;
-    $_SESSION['name'] = $datauser['name'];
+    $_SESSION['login'] = true;
+    $_SESSION['nama'] = $datauser['nama'];
     $_SESSION['email'] = $datauser['email'];
     // $_SESSION['role'] = $datauser['role'];
     mysqli_close($koneksi);
