@@ -76,7 +76,7 @@ if (!$buku) {
                     <!-- Kategori -->
                     <div class="form-group">
                         <label>Kategori</label>
-                        <select class="form-control" name="kategori_id" required>
+                        <select class="form-control" name="id_kategori" required>
                             <option value="">-- Pilih Kategori --</option>
                             <?php
                             $sql_kategori = "SELECT * FROM kategori";

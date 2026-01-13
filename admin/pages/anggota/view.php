@@ -91,7 +91,7 @@
                             <tr>
                                 <td><?php echo $no; ?></td>
                                 <td><?php echo $data['kode_anggota']; ?></td> <!-- Tampilkan Kode -->
-                                <td><?php echo $data['nama']; ?></td>
+                                <td><?php echo $data['nama_anggota']; ?></td>
                                 <td><?php echo $data['jenis_kelamin']; ?></td>
                                 <td><?php echo $data['alamat']; ?></td>
                                 <td><?php echo $data['no_hp']; ?></td>

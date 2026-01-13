@@ -40,17 +40,26 @@ if (isset($_GET['page'])) {
             include "pages/anggota/edit.php";
             break;
 
-    // Sales Routing
-    case 'sales':
-        include "pages/sales/view.php";
-        break;
-    case 'addsale':
-        include "pages/sales/create.php";
-        break;
-    case 'detailsale':
-        include "pages/sales/detail.php";
-        break;
+        // Sales Routing
+        case 'peminjaman':
+            include "pages/peminjaman/view.php";
+            break;
+        case 'addpeminjaman':
+            include "pages/peminjaman/create.php";
+            break;
+        case 'detailpeminjaman':
+            include "pages/peminjaman/detail.php";
+            break;
     }
+
+    if (!isset($_GET['page'])) {
+    include "pages/dashboard.php";
+}
+
+    elseif ($_GET['page'] == "dashboard") {
+    include "pages/dashboard.php";
+}
+
 
 } else {
     include "pages/home.php";

@@ -44,7 +44,7 @@ include "../config/koneksi.php";
                 <!-- Tombol Tambah & Cetak -->
                 <div class="d-flex mb-3 justify-content-between">
                     <a href="dashboard.php?page=addbuku" class="btn btn-primary">Tambah Buku</a>
-                    <a href="pages/buku/print.php" class="btn btn-success" target="_blank">Cetak</a>
+                    
                 </div>
 
                 <!-- Pesan Sukses / Error -->
@@ -76,8 +76,8 @@ include "../config/koneksi.php";
                     <div class="row">
                         <div class="col-10">
                             <input class="form-control mb-2" type="text" name="judul"
-                                   placeholder="Judul Buku"
-                                   value="<?= isset($_GET['judul']) ? htmlspecialchars($_GET['judul']) : ''; ?>">
+                                placeholder="Judul Buku"
+                                value="<?= isset($_GET['judul']) ? htmlspecialchars($_GET['judul']) : ''; ?>">
                         </div>
                         <div class="col-2">
                             <button type="submit" class="btn btn-primary">Cari</button>
@@ -104,7 +104,7 @@ include "../config/koneksi.php";
                         <?php
                         $no = 1;
 
-                        // Query buku LEFT JOIN kategori supaya semua buku tampil
+                        // Query buku + kategori (SUDAH BENAR)
                         $sql = "SELECT buku.*, kategori.nama_kategori 
                                 FROM buku 
                                 LEFT JOIN kategori ON buku.id_kategori = kategori.id_kategori";
@@ -116,28 +116,33 @@ include "../config/koneksi.php";
                         }
 
                         $query = mysqli_query($koneksi, $sql);
+
+                        // Optional: cek error query (debug)
+                        if (!$query) {
+                            die("Query Error: " . mysqli_error($koneksi));
+                        }
+
                         while ($buku = mysqli_fetch_assoc($query)) {
                         ?>
                             <tr>
-                                <td><?= $no; ?></td>
+                                <td><?= $no++; ?></td>
                                 <td><?= htmlspecialchars($buku['kode_buku']); ?></td>
                                 <td><?= htmlspecialchars($buku['judul']); ?></td>
-                                <td><?= $buku['nama_kategori'] ?? '-'; ?></td>
+                                <td><?= $buku['nama_kategori'] ?: '-'; ?></td>
                                 <td><?= htmlspecialchars($buku['pengarang']); ?></td>
                                 <td><?= htmlspecialchars($buku['penerbit']); ?></td>
                                 <td><?= htmlspecialchars($buku['tahun_terbit']); ?></td>
                                 <td><?= htmlspecialchars($buku['stok']); ?></td>
                                 <td>
-                                    <div class="d-flex">
-                                        <a href="dashboard.php?page=editbuku&id_buku=<?= $buku['id_buku']; ?>"
-                                           class="btn btn-sm btn-success mr-2">Edit</a>
-                                        <a href="pages/buku/action.php?act=delete&id_buku=<?= $buku['id_buku']; ?>"
-                                           class="btn btn-sm btn-danger"
-                                           onclick="return confirm('Yakin hapus buku ini?')">Hapus</a>
-                                    </div>
+                                    <a href="dashboard.php?page=editbuku&id_buku=<?= $buku['id_buku']; ?>"
+                                        class="btn btn-sm btn-success">Edit</a>
+                                    <a href="pages/buku/action.php?act=delete&id_buku=<?= $buku['id_buku']; ?>"
+                                        class="btn btn-sm btn-danger"
+                                        onclick="return confirm('Yakin hapus buku ini?')">Hapus</a>
                                 </td>
                             </tr>
-                        <?php $no++; } ?>
+                        <?php
+                        } ?>
                     </tbody>
                 </table>
 
