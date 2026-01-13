@@ -22,7 +22,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <body class="hold-transition sidebar-mini">
   <?php
     session_start(); 
-    if(!isset($_SESSION['status_login']) && $_SESSION['status_login'] == false){
+    if(!isset($_SESSION['login']) && $_SESSION['login'] == false){
       $_SESSION['message'] = 'Anda Harus Login Dulu';
       header('location:../index.php');
     }

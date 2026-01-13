@@ -2,12 +2,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Categories</h1>
+                <h1 class="m-0">Kategori</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Categories</li>
+                    <li class="breadcrumb-item"><a href="../../dashboard.php">Home</a></li>
+                    <li class="breadcrumb-item active">Kategori</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -34,7 +34,7 @@
                 <div class="d-flex mb-3 justify-content-between" >
                     <!-- Tombol untuk menuju halaman tambah kategori -->
                     <!-- Link mengarah ke dashboard.php dengan parameter page=addcategory -->
-                    <a href="dashboard.php?page=addcategory" class="btn btn-primary ">Tambah Data</a>
+                    <a href="dashboard.php?page=addkategori" class="btn btn-primary ">Tambah Data</a>
                 </div>
                 <?php
                 // Mengecek apakah ada pesan notifikasi dari session
@@ -70,8 +70,8 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th style="width: 10px">#</th>
-                            <th>Category Name</th>
+                            <th style="width: 10px">No</th>
+                            <th>Nama Kategori</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -90,12 +90,12 @@
                                 <td>
                                     <div class="d-flex">
                                         <!-- Tombol Edit: mengirim parameter page=editcategory dan category_id -->
-                                        <a href="dashboard.php?page=editcategory&category_id=<?php echo $data['id_kategori'] ?>"
+                                        <a href="dashboard.php?page=editkategori&id_kategori=<?php echo $data['id_kategori'] ?>"
                                             class="btn btn-sm btn-success mr-2">Edit</a>
                                         
                                         <!-- Tombol Hapus: mengirim parameter ke action.php dengan act=delete dan category_id -->
                                         <!-- onclick confirm untuk konfirmasi sebelum menghapus -->
-                                        <a href="pages/categories/action.php?act=delete&category_id=<?php echo $data['id_kategori']; ?>"
+                                        <a href="pages/kategori/action.php?act=delete&id_kategori=<?php echo $data['id_kategori']; ?>"
                                             class="btn btn-sm btn-danger"
                                             onclick="return confirm('Are You Sure, Delete this Data')">Hapus</a>
                                     </div>

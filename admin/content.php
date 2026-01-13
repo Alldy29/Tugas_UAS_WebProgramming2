@@ -8,8 +8,8 @@ if (isset($_GET['page'])) {
             include "pages/buku/view.php";
             break;
 
-        case "customers":
-            include "pages/customers/view.php";
+        case "anggota":
+            include "pages/anggota/view.php";
             break;
 
         case "addbuku":
@@ -20,24 +20,24 @@ if (isset($_GET['page'])) {
             include "pages/buku/edit.php";
             break;
 
-        case "categories":
-            include "pages/categories/view.php";
+        case "kategori":
+            include "pages/kategori/view.php";
             break;
 
-        case "addcategory":
-            include "pages/categories/create.php";
+        case "addkategori":
+            include "pages/kategori/create.php";
             break;
 
-        case "editcategory":
-            include "pages/categories/edit.php";
+        case "editkategori":
+            include "pages/kategori/edit.php";
             break;
 
-        case "addcustomer":
-            include "pages/customers/create.php";
+        case "addanggota":
+            include "pages/anggota/create.php";
             break;
 
-        case "editcustomer":
-            include "pages/customers/edit.php";
+        case "editanggota":
+            include "pages/anggota/edit.php";
             break;
 
     // Sales Routing
