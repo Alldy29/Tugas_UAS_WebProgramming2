@@ -26,7 +26,7 @@
         </b>LP3I</a>
       </div>
       <div class="card-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+        <p class="login-box-msg">Aldyana</p>
         <?php
         session_start();
         if (isset($_SESSION['message'])) {
